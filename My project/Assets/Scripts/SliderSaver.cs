@@ -114,6 +114,29 @@ public class SliderSaver : MonoBehaviour
     //this private void checks for the Master togglebuttons state and if it changes. 
     private void OnchangeMaster(bool MastertoggleState)
     {
+        /*                      This code was meant to randomize the brightness values when both ktichen and bedrrom was 
+        if(KitchenBrightnessSlider.value == 0 && PlayerPrefs.GetFloat("saveKitchenBrightnessSlider") == 0 && Kitchentoggle == true)
+        {
+            KitchenBrightnessSlider.value = Random.Range(_minValue, _maxValue);
+            //MasterToggle.isOn = true;
+        }
+        else
+        {
+            KitchenBrightnessSlider.value = PlayerPrefs.GetFloat("saveKitchenBrightnessSlider");
+        }
+
+
+        if (BedroomBrightnessSlider.value == 0 && PlayerPrefs.GetFloat("saveBedroomBrightnessSlider") == 0 && Bedroomtoggle == true)
+        {
+            BedroomBrightnessSlider.value = Random.Range(_minValue, _maxValue);
+            //MasterToggle.isOn = true;
+        }
+        else
+        {
+           BedroomBrightnessSlider.value = PlayerPrefs.GetFloat("saveBedroomBrightnessSlider");
+        }*/
+
+
         //if the togglebutton is on, the Bedroom toggle and Kitchen Toggle will go and get the data from the playerprefs
         if (MastertoggleState)
         {
@@ -216,8 +239,8 @@ public class SliderSaver : MonoBehaviour
         }
         else 
         {
-            // KitchenBrightnessSlider.value = PlayerPrefs.SetFloat("saveKitchenBrightnessSlider");
-            // KitchenBrightnessSlider.value = 0;
+            // a temporary slidervalue is being equal to the kitchen brightness slider value, after that the kitchenBrightnessvalue equal to 0, 
+            //after this you call the playerprefs and save the float value from the temporary slider into the "saveKitchenBrightnessSlider" 
             float KitchenSliderValueTemporary = KitchenBrightnessSlider.value;
             KitchenBrightnessSlider.value = 0;
             PlayerPrefs.SetFloat("saveKitchenBrightnessSlider", KitchenSliderValueTemporary);
@@ -244,8 +267,8 @@ public class SliderSaver : MonoBehaviour
         }
         else
         {
-            // KitchenBrightnessSlider.value = PlayerPrefs.SetFloat("saveKitchenBrightnessSlider");
-            // KitchenBrightnessSlider.value = 0;
+            // a temporary slidervalue is being equal to the kitchen brightness slider value, after that the BedroomBrightnessvalue equal to 0, 
+            //after this you call the playerprefs and save the float value from the temporary slider into the "saveBedroomBrightnessSlider" 
             float BedroomSliderValueTemporary = BedroomBrightnessSlider.value;
             BedroomBrightnessSlider.value = 0;
             PlayerPrefs.SetFloat("saveBedroomBrightnessSlider", BedroomSliderValueTemporary);
