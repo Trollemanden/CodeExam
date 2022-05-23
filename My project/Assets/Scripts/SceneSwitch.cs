@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
-  public void SceneSwitcher()
+    public void SceneChangetoNewScene()
     {
         SceneManager.LoadScene(1);
     }
+    public void SceneChangetoHomePage()
+    {
+        SceneManager.LoadScene(0);
 
-
+    }
 }
+
