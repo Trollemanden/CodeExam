@@ -1,7 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+
+
+
+//INSPIRATION LINKS:
+//https://www.youtube.com/watch?v=g_KjLe6UmXE - Inspiration on making a randomizer 
+//https://www.youtube.com/watch?v=KhwSvpNRCdE - Inspiration on making playerprefs on sliders
+//https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator - Inspiration on making ShortHand binary integer if-else statements in C#
 
 public class SliderSaver : MonoBehaviour
 {
