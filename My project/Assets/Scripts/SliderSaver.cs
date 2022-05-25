@@ -32,19 +32,20 @@ public class SliderSaver : MonoBehaviour
     private int _maxValue =100;
     private int _minValue =1;
 
-
     public void Start()
     {
         //at the start, both on play and when you change back and forth on the scenes, these values will be called.
 
-       
-        MasterToggle.onValueChanged.AddListener(OnchangeMaster);
 
-       // KitchenBrightnessSlider.value = PlayerPrefs.GetFloat("saveKitchenBrightnessSlider");
+        MasterToggle.onValueChanged.AddListener(OnchangeMaster);
+        
+        //KitchenBrightnesssliders gets its value from PlayerPrefs float which is called "saveKitchenBrightnessSlider" 
+        KitchenBrightnessSlider.value = PlayerPrefs.GetFloat("saveKitchenBrightnessSlider");
         KitchenTempuratureSlider.value = PlayerPrefs.GetFloat("saveKitchenTempuratureSlider");
 
         Kitchentoggle.onValueChanged.AddListener(OnchangedKitchen);
 
+        //BedroomBrightnesssliders gets its value from PlayerPrefs float which is called "saveKitchenBrightnessSlider" 
         BedroomBrightnessSlider.value = PlayerPrefs.GetFloat("saveBedroomBrightnessSlider");
         BedroomTempuratureSlider.value = PlayerPrefs.GetFloat("saveBedroomTempuratureSlider");
 
@@ -59,8 +60,8 @@ public class SliderSaver : MonoBehaviour
         KitchenBrightnessSlider.onValueChanged.AddListener(ChangeKitchenBrightnessSlider);
 
         KitchenTempuratureSlider.onValueChanged.AddListener(ChangeKitchenTempuratureSlider);
-
-
+        
+        
 
 
         //this makes the BrightnessValue the same as the slider.Value, this could probably be deleted and just write BrightnessSlider.value everywhere instead of BrightnessSliderValue and vise versa
@@ -69,9 +70,6 @@ public class SliderSaver : MonoBehaviour
         KitchenBrightnessSliderValue = KitchenBrightnessSlider.value;
 
 
-
-        //KitchenBrightnesssliders gets its value from PlayerPrefs float which is called "saveKitchenBrightnessSlider" 
-        KitchenBrightnessSlider.value = PlayerPrefs.GetFloat("saveKitchenBrightnessSlider");
 
         //if statement that shows that when the sliders value is 0, the togglebutton should be off and if not then the toggle button is on
         if (KitchenBrightnessSliderValue == 0)
@@ -83,8 +81,6 @@ public class SliderSaver : MonoBehaviour
             Kitchentoggle.isOn = true;
         }
 
-        //BedroomBrightnesssliders gets its value from PlayerPrefs float which is called "saveKitchenBrightnessSlider" 
-        BedroomBrightnessSlider.value = PlayerPrefs.GetFloat("saveBedroomBrightnessSlider");
         //if statement that shows that when the sliders value is 0, the togglebutton should be off and if not then the toggle button is on
         if (BedroomBrightnessSliderValue == 0)
         {
@@ -98,12 +94,18 @@ public class SliderSaver : MonoBehaviour
     }
 
 
+    private void Awake()
+    {
+
+    }
+
     private void Update()
     {
         // checks if the brightness and kitchen slider values is 0, if it is then the togglebutton turns off. if not then the mastertoggle is on
         if (BedroomBrightnessSlider.value == 0 && KitchenBrightnessSlider.value == 0)
         {
            MasterToggle.isOn = false;
+
         }
         else
         {
@@ -114,37 +116,13 @@ public class SliderSaver : MonoBehaviour
     //this private void checks for the Master togglebuttons state and if it changes. 
     private void OnchangeMaster(bool MastertoggleState)
     {
-        /*                      This code was meant to randomize the brightness values when both ktichen and bedrrom was 
-        if(KitchenBrightnessSlider.value == 0 && PlayerPrefs.GetFloat("saveKitchenBrightnessSlider") == 0 && Kitchentoggle == true)
-        {
-            KitchenBrightnessSlider.value = Random.Range(_minValue, _maxValue);
-            //MasterToggle.isOn = true;
-        }
-        else
-        {
-            KitchenBrightnessSlider.value = PlayerPrefs.GetFloat("saveKitchenBrightnessSlider");
-        }
-
-
-        if (BedroomBrightnessSlider.value == 0 && PlayerPrefs.GetFloat("saveBedroomBrightnessSlider") == 0 && Bedroomtoggle == true)
-        {
-            BedroomBrightnessSlider.value = Random.Range(_minValue, _maxValue);
-            //MasterToggle.isOn = true;
-        }
-        else
-        {
-           BedroomBrightnessSlider.value = PlayerPrefs.GetFloat("saveBedroomBrightnessSlider");
-        }*/
-
-
-        //if the togglebutton is on, the Bedroom toggle and Kitchen Toggle will go and get the data from the playerprefs
+       //if the togglebutton is on, the Bedroom toggle and Kitchen Toggle will go and get the data from the playerprefs
         if (MastertoggleState)
         {
             //if it is equal to 1 then true else false
             // it checks this by using the ShortHand binary if-else statement in C#, and is checking if the togglebutton state is equal to 1, which means on.
             Bedroomtoggle.isOn = PlayerPrefs.GetInt("Bedroomtoggle") == 1;
-            Kitchentoggle.isOn = PlayerPrefs.GetInt("Kitchentoggle") == 1;
-                                               
+            Kitchentoggle.isOn = PlayerPrefs.GetInt("Kitchentoggle") == 1;                      
         }
         else
         {
@@ -153,10 +131,10 @@ public class SliderSaver : MonoBehaviour
             PlayerPrefs.SetInt("Bedroomtoggle", Bedroomtoggle.isOn ? 1 : 0);
             PlayerPrefs.SetInt("Kitchentoggle", Kitchentoggle.isOn ? 1 : 0);
             //after it have saved the data it should turn off the different togglebuttons
+
             Bedroomtoggle.isOn = false;
             Kitchentoggle.isOn = false;
-           // MasterToggle.isOn = false;
-
+           MasterToggle.isOn = false;
         }
     }
 
@@ -221,7 +199,7 @@ public class SliderSaver : MonoBehaviour
  
     public void OnchangedKitchen(bool KitchentoggleState)
     {
-       //checks the Kitchentogglestate, if the KitchenBrightnessSliders value is 0
+        //checks the Kitchentogglestate, if the KitchenBrightnessSliders value is 0
         //if it is 0 then when the toggle is being pressed it gives a random value from between the min and max value
         //which is preset to 1-100, if the kitchenbrightnessSliders value is over 0 then it will get the playerprefs and save the value
         if (KitchentoggleState)
@@ -276,5 +254,4 @@ public class SliderSaver : MonoBehaviour
 
         }
     }
-
 }
